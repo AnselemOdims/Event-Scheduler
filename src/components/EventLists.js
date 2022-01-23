@@ -11,6 +11,7 @@ margin: 20px 0;
   border-radius: 7px;
   max-width: 300px;
   padding: 10px 20px;
+  border-left: solid 3px #1572a1;
 
   > button {
     border: none;
