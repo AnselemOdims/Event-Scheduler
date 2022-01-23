@@ -6,6 +6,7 @@ const DatesTimes = ({label, type, handleDate, data}) => {
 					type={type}
 					onChange={handleDate}
 					value={data}
+					required
 				/>
 		</label>
    );

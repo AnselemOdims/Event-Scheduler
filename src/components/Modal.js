@@ -10,12 +10,31 @@ right: 0;
 background: rgba(51, 50, 50, 0.596);
 
 > div {
-  width: 400px;
-  margin: 70px auto;
+  width: 39%;
+  margin: 30px auto;
   text-align: center;
   background: #fff;
   padding: 10px;
   border-radius: 7px;
+
+   > div {
+    display: flex;
+    justify-content: flex-end;
+
+    button{
+      border: none;
+      background: #fff;
+      font-size: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: var(--font-1)
+    }
+
+    button:hover {
+      color: #FF7F3F;
+    }
+
+   }
 }
 
 `
@@ -23,7 +42,9 @@ const Modal = ({children, handleModal}) => {
   return ReactDOM.createPortal(( 
     <Backdrop>
       <div className="modal">
-      <button onClick={handleModal}>X</button>
+        <div>
+      <button onClick={handleModal}>x</button>
+        </div>
       {children}
       </div>
     </Backdrop>

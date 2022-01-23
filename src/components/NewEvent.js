@@ -12,19 +12,48 @@ const Form = styled.form`
 	> label {
 		display: flex;
 		flex-direction: column;
-		margin: 10px 0;
+		margin: 10px 0 0;
+
+    > input {
+      padding: 0;
+      border: none;
+      border-bottom: solid 0.1rem #9AD0EC;
+      border-radius: 3px;
+      font-family: var(--font-1);
+      cursor: pointer;
+      transition: border-bottom,padding ease-out 0.2s 0.3s;
+
+      &:focus {
+        outline: none;
+        border: none;
+        border-bottom: solid 0.1rem #1572A1;
+        padding: 8px;
+      }
+    }
 
 		> span {
 			align-self: flex-start;
-			margin-bottom: 5px;
+      font-weight: 520;
+      margin-top: 10px;
 		}
+
+    &.desc {
+      > span {
+        margin-bottom: 5px;
+      }
+    }
 
 		> textarea {
-			margin-bottom: 30px;
-		}
+			margin-bottom: 20px;
+      height: 80px;
+      font-family: var(--font-1);
+      border: solid 0.1rem #9AD0EC;
+      border-radius: 3px;
 
-		> select {
-			color: blue;
+      &:focus {
+        border: solid 0.1rem #1572A1;
+        outline: none;
+      }
 		}
 	}
 
@@ -32,6 +61,25 @@ const Form = styled.form`
 		display: flex;
 		justify-content: flex-start;
 	}
+
+  .hide {
+    font-size: 12px;
+    label {
+
+      margin-top: 3px;
+    }
+  }
+
+  > button {
+    padding: 12px 15px;
+    border: none;
+    background: #1572A1;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: var(--font-1);
+    font-size: 1rem;
+  }
 `;
 
 const NewEvent = ({ updateList }) => {
@@ -43,7 +91,6 @@ const NewEvent = ({ updateList }) => {
 	const [type, setType] = useState('Birthday');
 	const [hidden, setHidden] = useState(false);
 
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const data = {
@@ -53,20 +100,21 @@ const NewEvent = ({ updateList }) => {
 			description,
 			location,
 			time,
-      type,
+			type,
 		};
 		updateList(data);
 	};
 
 	const handleCheck = () => {
-		setLocation('Hidden');
+		setLocation('Strictly by IV');
 		setHidden(!hidden);
 	};
 
-  const handleChange = (e) => {
-    e.target.dataset.type==='Event Type:' ? setType(e.target.value) : setLocation(e.target.value) 
-    console.log(e.target.style)
-  }
+	const handleChange = (e) => {
+		e.target.dataset.type === 'Event Type:'
+			? setType(e.target.value)
+			: setLocation(e.target.value);
+	};
 
 	const handleDate = (e) => {
 		e.target.type === 'date'
@@ -82,6 +130,7 @@ const NewEvent = ({ updateList }) => {
 					type='text'
 					onChange={(e) => setTitle(e.target.value)}
 					value={title}
+          required
 				/>
 			</label>
 			<Select
@@ -93,12 +142,12 @@ const NewEvent = ({ updateList }) => {
 					{ value: 'Live Football', id: 5 },
 					{ value: 'Play Game', id: 6 },
 				]}
-        types='Event Type:'
-        handleChange={handleChange}
-        hidden= {false}
-        valueData={type}
+				types='Event Type:'
+				handleChange={handleChange}
+				hidden={false}
+				valueData={type}
 			/>
-      	<Select
+			<Select
 				data={[
 					{ value: 'Lagos', id: 1 },
 					{ value: 'Abuja', id: 2 },
@@ -107,31 +156,11 @@ const NewEvent = ({ updateList }) => {
 					{ value: 'Calabar', id: 5 },
 					{ value: 'Jos', id: 6 },
 				]}
-        types='Location:'
-        handleChange={handleChange}
-        hidden={hidden}
-        valueData={location}
+				types='Location:'
+				handleChange={handleChange}
+				hidden={hidden}
+				valueData={location}
 			/>
-			<label>
-				<span>Location: </span>
-				<select
-					onChange={(e) => setLocation(e.target.value)}
-					value={location}
-					style={{
-						textDecoration: hidden ? 'line-through' : 'none',
-						background: hidden ? 'orange' : '',
-					}}
-				>
-					{hidden && <option value='hidden'>Hidden</option>}
-					<option value='Lagos'>Lagos</option>
-					<option value='Abuja'>Abuja</option>
-					<option value='select'>Owerri</option>
-					<option value='Owerri'>Kaduna</option>
-					<option value='Awka'>Awka</option>
-					<option value='Cross-Rivers'>Cross-Rivers</option>
-					<option value='Jos'>Jos</option>
-				</select>
-			</label>
 			<div className='hide'>
 				<input type='checkbox' onChange={handleCheck} value='hide location' />
 				<label>{hidden ? 'Location Hidden' : 'Hide Location'}</label>
@@ -148,7 +177,7 @@ const NewEvent = ({ updateList }) => {
 				handleDate={handleDate}
 				data={time}
 			/>
-			<label>
+			<label className="desc">
 				<span>Description</span>
 				<textarea
 					placeholder={description}
