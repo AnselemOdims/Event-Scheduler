@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import Title from './components/Title';
+import Modal from './components/Modal';
+import EventLists from './components/EventLists';
+import NewEvent from './components/NewEvent';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [showModal, setShowModal] = useState(false);
+  const [showEvents, setShowEvents] = useState(false);
+  const [events, setEvents] = useState([])
+
+	const handleModal = () => showModal ? setShowModal(false):setShowModal(true);
+
+  const handleRemove = (id) => {
+    setEvents(prevState => (
+      prevState.filter(event=> event.id !== id)
+    ))
+  }
+
+  const updateList = (data) => {
+    setEvents(prevState=>[...prevState, data]);
+    setShowModal(false)
+  }
+
+	return (
+		<div className='App'>
+			<Title title='Event Scheduler' subTitle='All the events in your area' />
+			<button onClick={handleModal}>Add New Event</button>
+			{!showEvents && <button onClick={()=> setShowEvents(true)}>Show Events</button>}
+			{showEvents && <button onClick={()=> setShowEvents(false)}>Hide Events</button>}
+      {showEvents && <EventLists events={events} handleRemove={handleRemove}/>}
+      {!showEvents && <h3>Events are hidden, click <span>Show Events</span> button to see events</h3>}
+			<hr/>
+      {showModal && (
+				<Modal handleModal={handleModal}>
+					<NewEvent updateList={updateList}/>
+				</Modal>
+			)}
+		</div>
+	);
 }
 
 export default App;
