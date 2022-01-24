@@ -13,6 +13,10 @@ margin: 20px 0;
   padding: 10px 20px;
   border-left: solid 3px #1572a1;
 
+  > h2 {
+    color:  #1572A1;
+  }
+
   > button {
     border: none;
     background: #FF7F3F;
