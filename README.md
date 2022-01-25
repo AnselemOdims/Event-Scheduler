@@ -1,4 +1,8 @@
-#Event Scheduler
+# Event Scheduler
+
+> Event scheduler is a simple app for viewing the events happening around you. User can also create their event and include a location. Location can also be marked as hidden(strictly by IV). Built with React and Styled Components
+
+Live Demo
 
 
 ## Available Scripts
