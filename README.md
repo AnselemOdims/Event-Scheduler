@@ -4,7 +4,7 @@
 
 ## Live Demo
 
-[Live Demo Link](anse-events.netlify.app/)
+[Live Demo Link](https://anse-events.netlify.app/)
 
 ## Available Scripts
 
