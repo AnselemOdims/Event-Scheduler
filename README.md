@@ -6,6 +6,11 @@
 
 [Live Demo Link](https://anse-events.netlify.app/)
 
+## Screenshot
+
+![image](https://user-images.githubusercontent.com/43995830/151538942-e5491050-1941-47c5-a1d5-34d1bbf27965.png)
+
+
 ## Available Scripts
 
 In the project directory, you can run:
